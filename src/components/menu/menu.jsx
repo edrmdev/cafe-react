@@ -12,6 +12,7 @@ import Button from '@mui/material/Button';
 import ToolTip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import CoffeIcon from '@mui/icons-material/Coffee';
+import { NavLink, Link } from 'react-router-dom';
 
 function MenuNavBar( props ) {
 
@@ -21,7 +22,6 @@ function MenuNavBar( props ) {
 
   //Event handlers
   const handleOpenNavMenu = (event) => {
-    console.log('aqui!');
     setAnchorElNav(event.currentTarget);
   }
 
@@ -29,10 +29,7 @@ function MenuNavBar( props ) {
     setAnchorElUser(event.currentTarget);
   }
 
-  const handleCloseNavMenu = (event) => {
-    const page = event.currentTarget.innerText;
-
-    console.log( `Page to open: ${ page }` );
+  const handleCloseNavMenu = (event) => {    
     setAnchorElNav(null);
   }
 
@@ -94,18 +91,26 @@ function MenuNavBar( props ) {
               { 
                 pages.map((page, idx) => {
                   <MenuItem key={idx} onClick={handleCloseNavMenu}>
-                    <Typography textAlign="center">{page}</Typography>
+                    <Typography textAlign="center">
+                      <Link
+                        style={{ textDecoration: 'none', color: 'white' }}
+                        to={`/${page}`}
+                      >
+                        {page}
+                      </Link>
+                      </Typography>
                   </MenuItem>
                 })
               }
             </Menu>
           </Box>
           <CoffeIcon sx={{ display:{ xs:'flex', md:'none' }, mr: 1 }}/>
+          {/* Menu Title Responsive */}
           <Typography 
             variant="h5"
             noWrap
             component="a"
-            href="/home"
+            href="/"
             sx={{
               mr: 2,
               display: { xs: 'flex', md: 'none' },
@@ -121,15 +126,18 @@ function MenuNavBar( props ) {
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' }}} >
           {
+            
             pages.map((page, idx) => (
-              <Button
-                key={idx}
-                onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: '#FFFF', display: 'block' }}
-              >
-                { page }
-              </Button>
-            ))}
+              <Link to={`/${page}`} style={{ textDecoration: "none" }}>
+                <Button
+                  key={idx}
+                  onClick={handleCloseNavMenu}
+                  sx={{ my: 2, color: '#FFFF', display: 'block' }}> 
+                    { page }
+                </Button>
+              </Link>
+            ))
+          }
           </Box>
           <Box sx={{flexGrow: 0 }}>
             <ToolTip title="Open Settings">
@@ -156,7 +164,14 @@ function MenuNavBar( props ) {
               {
                 settings.map((setting, idx) => (
                   <MenuItem key={idx} onClick={handleCloseUserMenu}>
-                    <Typography textAlign="center">{setting}</Typography>
+                    <Typography textAlign="center">
+                    <Link
+                        style={{ textDecoration: 'none' }}
+                        to={`/${setting}`}
+                      >
+                        {setting}
+                      </Link>
+                    </Typography>
                   </MenuItem>
                 ))
               }
