@@ -3,7 +3,6 @@ import { getProducts } from '../../services/public.service';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
-import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 
@@ -19,12 +18,11 @@ const ProductsList = ( ) => {
     }, []);
 
     return(
-        <Container sx={{ py: 0 }} maxWidth="lg">
-        <Grid container spacing = {2}>
+        <Grid container spacing={2}>
         {
         (productos.length > 0 ) ? 
             productos.map((item, idx) => (
-                <Grid item xs={12} md={4} lg={4} key={idx}>
+                <Grid item xs={12} md={4} lg={3} key={idx}>
                     <Card 
                         key={item.nombre}
                         sx={{ 
@@ -60,7 +58,6 @@ const ProductsList = ( ) => {
             : <h4>No Products Available</h4>
         }
     </Grid>
-    </Container>
     );
 }
 
