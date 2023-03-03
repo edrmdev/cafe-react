@@ -1,13 +1,16 @@
 import { useState } from 'react';
+import MenuNavBar from './components/menu/menu';
+import AppRouter from './routes/root';
+
+const pages = ['Usuarios', 'Productos', 'Categorías'];
+const settings = ['Usuarios', 'Productos', 'Categorías', 'Cerrar Sesión'];
 
 function App() {
   
- //const pages = ['Usuarios', 'Productos', 'Categorías'];
- //const settings = ['Usuarios', 'Productos', 'Categorías', 'Cerrar Sesión'];
-
   return (
     <>
-      <p>Definiendo nueva estructura</p>
+      <MenuNavBar title="Cafe" pages={pages} settings={settings} />
+      <AppRouter />
     </>
   )
 }
