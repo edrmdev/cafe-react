@@ -5,11 +5,13 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
+import { getProductos } from '../../services/products.service';
 
-const ProductsList = ( ) => {
+const ProductsList = ( props ) => {
+    const { cantidad_productos = 10 } = props;
     const [productos, setProductos ] = useState([]);
     const getProductsDataFromAPI = async () => {
-        const { productos } = await getProducts(10); 
+        const { productos } = await getProductos(cantidad_productos); 
         setProductos(productos);
     }
 
