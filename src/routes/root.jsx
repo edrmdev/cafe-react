@@ -5,15 +5,42 @@ import {
     Productos as ProductsPage,
     Usuarios as UsersPage
 } from '../pages/';
+import LoginPage from "../pages/Login/login-page";
+import ProtectedRoute from "./protected";
+import WithNav from "./withnav";
+import WithoutNav from "./withoutnav";
+const user = true;
 
-const router = () => (
+const routes = () => (
     <Routes>
-        <Route path='/' element={<DashboardPage />}/>
-        <Route path='/usuarios' element={<UsersPage />}/>
-        <Route path='/productos' element={<ProductsPage />} />
-        <Route path='/logout' element={<h1>Logout Page</h1>} />
-        <Route path='*' element={<h1>Not Found</h1>} />
+        <Route element={<WithoutNav />}>
+            <Route path="/login" element={ <LoginPage />} />
+        </Route>
+        <Route element={<WithNav />}>
+            <Route path='/' element={
+                <ProtectedRoute user={user}>
+                    <DashboardPage />
+                </ProtectedRoute>
+            }/>
+            <Route 
+                path='/usuarios' 
+                element={
+                    <ProtectedRoute user={user}>
+                        <UsersPage />
+                    </ProtectedRoute>
+                }
+            />
+            <Route 
+                path='/productos' 
+                element={
+                    <ProtectedRoute user={user}>
+                        <ProductsPage />
+                    </ProtectedRoute>
+                } 
+            />
+            <Route path='/logout' element={<h1>Logout Page</h1>} />
+        </Route>
     </Routes>
 );
 
-export default router;
+export default routes;
