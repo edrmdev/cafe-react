@@ -1,17 +1,12 @@
-import { useState } from 'react';
-import MenuNavBar from './components/menu/menu';
 import AppRouter from './routes/root';
+import { useSelector } from 'react-redux';
 
-const pages = ['Usuarios', 'Productos', 'Categorías'];
-const settings = ['Usuarios', 'Productos', 'Categorías', 'Cerrar Sesión'];
+const App = () => {
 
-function App() {
+  const { auth } = useSelector( state=>state.rootReducer );
   
   return (
-    <>
-      <MenuNavBar title="Cafe" pages={pages} settings={settings} />
-      <AppRouter />
-    </>
+     <AppRouter user={ auth.user } />
   )
 }
 
