@@ -1,17 +1,16 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { 
-    Login,
+    Login as LoginPage,
     Dashboard as DashboardPage,
     Productos as ProductsPage,
     Usuarios as UsersPage
 } from '../pages/';
-import LoginPage from "../pages/Login/login-page";
+
 import ProtectedRoute from "./protected";
 import WithNav from "./withnav";
 import WithoutNav from "./withoutnav";
-const user = true;
 
-const routes = () => (
+const routes = ({user}) => (
     <Routes>
         <Route element={<WithoutNav />}>
             <Route path="/login" element={ <LoginPage />} />
@@ -38,7 +37,14 @@ const routes = () => (
                     </ProtectedRoute>
                 } 
             />
-            <Route path='/logout' element={<h1>Logout Page</h1>} />
+            <Route 
+                path='/categorias'
+                element={
+                    <ProtectedRoute user={user}>
+                        <h1>Categorias Page</h1>
+                    </ProtectedRoute>
+                }
+            />
         </Route>
     </Routes>
 );
