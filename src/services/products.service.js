@@ -1,6 +1,6 @@
 import { instance } from "./auth.service";
 
-const getProductos = async ( top = 5 ) => {
+const getProductos = async ( top = 15 ) => {
     const { data } = await instance.get( `/productos?limite=${top}`)
 
     if( ! data )
